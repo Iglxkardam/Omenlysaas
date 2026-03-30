@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { ToastProvider } from "@/providers/ToastProvider";
 import { RootLayout } from "@/components/layout/RootLayout";
+import { Preloader } from "@/components/Preloader";
 
 import "@fontsource/space-grotesk/400.css";
 import "@fontsource/space-grotesk/500.css";
@@ -40,9 +41,11 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HelmetProvider>
       <ToastProvider>
-        <Suspense fallback={<PageLoader />}>
-          <RouterProvider router={router} />
-        </Suspense>
+        <Preloader>
+          <Suspense fallback={<PageLoader />}>
+            <RouterProvider router={router} />
+          </Suspense>
+        </Preloader>
       </ToastProvider>
     </HelmetProvider>
   </StrictMode>,
