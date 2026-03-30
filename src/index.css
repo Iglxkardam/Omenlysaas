@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+/* ── Theme tokens ── */
+:root {
+  --c-bg: #06070a;
+  --c-bg-elevated: #0c0d12;
+  --c-bg-card: #111318;
+  --c-bg-card-hover: #16181f;
+  --c-border: #1e2028;
+  --c-border-hover: #2a2d38;
+  --c-text: #edeef0;
+  --c-text-secondary: #9ca0ab;
+  --c-text-muted: #6b7080;
+  --c-text-dim: #3a3e4a;
+  --c-accent: #4f8fff;
+  --c-accent-hover: #6da3ff;
+  --c-accent-muted: rgba(79, 143, 255, 0.10);
+  --c-accent-glow: rgba(79, 143, 255, 0.15);
+  --c-accent-2: #8b9cf7;
+  --c-accent-2-muted: rgba(139, 156, 247, 0.10);
+  --c-success: #22c55e;
+  --c-error: #ef4444;
+  --font-heading: "Syne", "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+}
+
+/* ── Base ── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color-scheme: dark;
+    /* Smooth scroll handled by Lenis/GSAP, not CSS */
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--c-bg);
+    color: var(--c-text-secondary);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+  }
+
+  ::selection {
+    background-color: var(--c-accent-muted);
+    color: var(--c-accent-hover);
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--c-bg); }
+  ::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: 2px; }
+}
+
+/* ── Utilities ── */
+@layer utilities {
+  .text-gradient-accent {
+    background: linear-gradient(135deg, var(--c-accent) 0%, var(--c-accent-2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-dot-grid {
+    background-image: radial-gradient(circle, var(--c-border) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .bg-radial-top {
+    background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(79, 143, 255, 0.06) 0%, transparent 70%);
+  }
+}
+
+/* ── GSAP reveal base ── */
+.gsap-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  will-change: opacity, transform;
+}
+
+/* Hero elements hidden until GSAP animates them */
+.hero-word {
+  clip-path: inset(100% 0 0 0);
+}
+
+.hero-anim {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+/* Services elements hidden until GSAP animates them */
+.svc-media,
+.svc-content {
+  opacity: 0;
+}
+
+.svc-feat {
+  opacity: 0;
+}
+
+/* Pipeline elements hidden until GSAP animates them */
+.pipe-step,
+.pipe-arrow {
+  opacity: 0;
+}
+
+/* Page-specific GSAP elements hidden until animated */
+.v-hero-el,
+.v-flow-card,
+.v-feat,
+.r-hero-el,
+.r-flow-card,
+.r-feat,
+.p-anim,
+.doc-anim,
+.ab-anim {
+  opacity: 0;
+}
+
+/* FOUC safety — if GSAP fails to load, content becomes visible after 2s */
+@keyframes fouc-safety {
+  to { opacity: 1; transform: none; clip-path: none; }
+}
+.hero-word,
+.hero-anim,
+.gsap-reveal,
+.svc-media,
+.svc-content,
+.svc-feat,
+.pipe-step,
+.pipe-arrow,
+.v-hero-el,
+.v-flow-card,
+.v-feat,
+.r-hero-el,
+.r-flow-card,
+.r-feat,
+.p-anim,
+.doc-anim,
+.ab-anim {
+  animation: fouc-safety 0s 2.5s forwards;
+}
+
+/* ── Noise ── */
+.noise::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  opacity: 0.015;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
