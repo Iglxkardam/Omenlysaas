@@ -1,73 +1,202 @@
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<br />
 
-Currently, two official plugins are available:
+<img src="https://img.shields.io/badge/OMENLY-Trustless_Oracle_Layer-4f8fff?style=for-the-badge&labelColor=06070a" alt="Omenly" />
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+<br /><br />
 
-## React Compiler
+# The Trustless Oracle Layer for Prediction Markets
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Decentralized market validation and settlement finality — powered by multi-agent BFT consensus.**
 
-## Expanding the ESLint configuration
+<br />
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+[![Settlement Finality](https://img.shields.io/badge/Settlement_Finality-<_15s-10b981?style=flat-square&labelColor=0c0d12)](/)
+[![Consensus](https://img.shields.io/badge/Consensus-BFT_Multi--Agent-4f8fff?style=flat-square&labelColor=0c0d12)](/)
+[![Oracle Sources](https://img.shields.io/badge/Oracle_Sources-8+-8b9cf7?style=flat-square&labelColor=0c0d12)](/)
+[![License](https://img.shields.io/badge/License-Proprietary-3a3e4a?style=flat-square&labelColor=0c0d12)](/)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+<br />
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+<img src="https://img.shields.io/badge/______________________________-06070a?style=for-the-badge&labelColor=06070a" alt="" />
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+</div>
+
+<br />
+
+## What is Omenly?
+
+Omenly is a **decentralized oracle engine** that validates market integrity and resolves outcomes for DeFi prediction markets — binary or multi-leg — through **multi-agent Byzantine fault-tolerant consensus**, cross-chain data verification, and immutable on-chain audit trails.
+
+> *One oracle endpoint. Deterministic screening. Cryptographic attestation.*
+
+<br />
+
+## Architecture
+
+```
+                    ┌─────────────────────────────────────────┐
+                    │              OMENLY PROTOCOL             │
+                    └──────────────────┬──────────────────────┘
+                                       │
+                         ┌─────────────┼─────────────┐
+                         │                           │
+                         ▼                           ▼
+              ┌─────────────────┐         ┌─────────────────┐
+              │    VALIDATOR    │         │    RESOLVER      │
+              │  Integrity Gate │         │ Settlement Engine│
+              └────────┬────────┘         └────────┬────────┘
+                       │                           │
+            ┌──────────┼──────────┐     ┌──────────┼──────────┐
+            │          │          │     │          │          │
+            ▼          ▼          ▼     ▼          ▼          ▼
+        ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐
+        │  MEV  │ │ Sybil │ │ Auto  │ │Agent 1│ │Agent 2│ │Agent 3│
+        │ Detect│ │ Guard │ │Remedy │ │  BFT  │ │  BFT  │ │  BFT  │
+        └───────┘ └───────┘ └───────┘ └───┬───┘ └───┬───┘ └───┬───┘
+                                          │         │         │
+                                          └────┬────┘─────────┘
+                                               │
+                                               ▼
+                                     ┌───────────────────┐
+                                     │  CONSENSUS ENGINE  │
+                                     │   Quorum + Attest  │
+                                     └─────────┬─────────┘
+                                               │
+                                               ▼
+                                     ┌───────────────────┐
+                                     │   ON-CHAIN PROOF   │
+                                     │  Evidence Anchored  │
+                                     └───────────────────┘
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+<br />
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Two Core Engines
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### Omenly Validator
+
+**The pre-trade integrity gate.**
+
+Screens every market submission through a deterministic pipeline before it hits the order book.
+
+<br />
+
+| Capability | Detail |
+|:---|:---|
+| Screening | 7-point deterministic pipeline |
+| MEV Detection | Front-run & sandwich resistance |
+| Sybil Guard | Exploitable criteria flagging |
+| Auto-Remediation | Fixable markets rewritten, not rejected |
+| Re-Attestation | Independent verification post-fix |
+| Output | Approved / Remediated / Rejected |
+
+</td>
+<td width="50%" valign="top">
+
+### Omenly Resolver
+
+**The settlement finality engine.**
+
+Achieves deterministic outcome resolution through decentralized oracle consensus.
+
+<br />
+
+| Capability | Detail |
+|:---|:---|
+| Finality | Sub-15 second settlement |
+| Consensus | BFT multi-agent quorum |
+| Data Layer | 8+ cross-chain oracle feeds |
+| Confidence | Probabilistic threshold scoring |
+| Evidence | Cryptographic on-chain anchoring |
+| Output | Verified outcome + evidence hash |
+
+</td>
+</tr>
+</table>
+
+<br />
+
+## Oracle Pipeline
+
 ```
+  ①                ②                ③                ④                ⑤
+  INTAKE     →    RESEARCH    →   CONSENSUS   →  ATTESTATION  →  SETTLEMENT
+  ──────          ────────        ─────────       ───────────     ──────────
+  Calldata        Cross-chain     BFT quorum      Cryptographic   On-chain
+  parsed via      oracle feeds    convergence     evidence        finality with
+  oracle          queried in      achieved         synthesis      immutable
+  endpoint        parallel                                        evidence hash
+```
+
+<br />
+
+## Tech Highlights
+
+<div align="center">
+
+| | |
+|:---|:---|
+| **Consensus Model** | Byzantine Fault Tolerant multi-agent quorum |
+| **Settlement Speed** | < 15 seconds to on-chain finality |
+| **Data Sources** | 8+ cross-chain oracle & off-chain feeds |
+| **Verification** | Zero-trust — no single entity trusted |
+| **Evidence** | Cryptographic attestation anchored on-chain |
+| **Scalability** | Permissionless — 10 to 10,000 concurrent markets |
+| **Integrity** | MEV-resistant, Sybil-resistant screening |
+| **Audit Trail** | Immutable reasoning chains + citation hashes |
+
+</div>
+
+<br />
+
+## Project Structure
+
+```
+Omenly/
+├── OmenlyValidator/     # Integrity screening engine
+├── OmenlyResolver/      # Settlement finality engine
+└── website/             # Protocol landing site (React + Vite)
+```
+
+<br />
+
+## Status
+
+<div align="center">
+
+| Component | Status |
+|:---|:---|
+| Validator Engine | ![Active](https://img.shields.io/badge/●_Active-10b981?style=flat-square&labelColor=0c0d12) |
+| Resolver Engine | ![Active](https://img.shields.io/badge/●_Active-4f8fff?style=flat-square&labelColor=0c0d12) |
+| Oracle Pipeline | ![Active](https://img.shields.io/badge/●_Active-8b9cf7?style=flat-square&labelColor=0c0d12) |
+| Website | ![Deployed](https://img.shields.io/badge/●_Deployed-10b981?style=flat-square&labelColor=0c0d12) |
+
+</div>
+
+<br />
+
+## Connect
+
+<div align="center">
+
+[![X](https://img.shields.io/badge/X_(Twitter)-@Jhod869800-ffffff?style=flat-square&logo=x&logoColor=white&labelColor=0c0d12)](https://x.com/Jhod869800)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Omenly-4f8fff?style=flat-square&logo=linkedin&logoColor=white&labelColor=0c0d12)](https://linkedin.com/company/omenly)
+[![Email](https://img.shields.io/badge/Email-Contact_Us-8b9cf7?style=flat-square&logo=gmail&logoColor=white&labelColor=0c0d12)](mailto:sachinkardam5581@gmail.com)
+
+<br /><br />
+
+<img src="https://img.shields.io/badge/______________________________-06070a?style=for-the-badge&labelColor=06070a" alt="" />
+
+<br />
+
+**Built for the protocols that need trustless settlement.**
+
+<sub>© 2026 Omenly. All rights reserved.</sub>
+
+</div>
